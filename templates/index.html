@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Color Analyzer</title>
+</head>
+<body>
+    <h1>Color Analyzer</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <input type="submit" value="Upload and Analyze">
+    </form>
+    {% if filename %}
+        <h2>Uploaded Image: {{ filename }}</h2>
+        <h2>Most Common Colors:</h2>
+        <ul>
+            {% for color, count in colors %}
+                <li style="background-color: rgb({{ color[0] }}, {{ color[1] }}, {{ color[2] }})">
+                    RGB: {{ color }} - Count: {{ count }}
+                </li>
+            {% endfor %}
+        </ul>
+        <img src="{{ filename }}" alt="Uploaded Image" width="400">
+    {% endif %}
+    {% if error %}
+        <p>Error: {{ error }}</p>
+    {% endif %}
+</body>
+</html>
